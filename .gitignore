@@ -1,0 +1,7 @@
+/.bloop/
+/.classpath
+/.metals/
+/.project
+/.settings/
+/target/
+/dependency-reduced-pom.xml

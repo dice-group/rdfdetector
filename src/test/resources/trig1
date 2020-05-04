@@ -1,0 +1,11 @@
+# Example 1 from https://www.w3.org/TR/2014/REC-trig-20140225/
+# This document encodes one graph.
+@prefix ex: <http://www.example.org/vocabulary#> .
+@prefix : <http://www.example.org/exampleDocument#> .
+
+:G1 { :Monica a ex:Person ;
+              ex:name "Monica Murphy" ;
+              ex:homepage <http://www.monicamurphy.org> ;
+              ex:email <mailto:monica@monicamurphy.org> ;
+              ex:hasSkill ex:Management ,
+                          ex:Programming . }

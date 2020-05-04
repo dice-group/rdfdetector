@@ -1,0 +1,73 @@
+digraph {
+  rankdir=LR
+  Start
+
+  subgraph {
+    rank = same; HDT; TriX; RDFJSON; JSONLD; N3; NQuads
+  }
+  HDTmagic [label="'$HDT'"]
+  Start -> HDTmagic -> HDT
+
+  OpenBrace [label="'{'"]
+  Start -> OpenBrace
+  RDFJSONmagic [label="'{\"URI\":{\"URI\":['"]
+  JSONLDmagic [label="Valid JSON,\nbut not RDF/JSON"]
+  JSONunknown [label="Valid JSON,\ninput limit exceeded"]
+  NotJSON [label="Invalid JSON"]
+  RDFJSON [label="RDF/JSON"]
+  JSONLD [label="JSON-LD"]
+  OpenBrace -> RDFJSONmagic -> RDFJSON
+  OpenBrace -> JSONLDmagic -> JSONLD
+  OpenBrace -> JSONunknown
+  JSONunknown -> RDFJSON
+  JSONunknown -> JSONLD
+  JSONunknown -> N3 [style="dotted"]
+  JSONunknown -> TriG [style="dotted"]
+  OpenBrace -> NotJSON
+  NotJSON -> TriG [style="dotted"]
+  NotJSON -> N3 [style="dotted"]
+
+  OpenAngle [label="'<'"]
+  Start -> OpenAngle
+  TriXstart [label="'<TriX>'"]
+  RDFXMLstart [label="'<rdf:Description>'"]
+  OpenAngle -> TriXstart -> TriX
+  OpenAngle -> RDFXMLstart -> RDFXML
+  OpenAngle -> XML
+  Other [label="Other"]
+  OpenAngle -> Other
+  Other -> N3
+  Other -> TriG
+  NQuads [label="N-Quads"]
+  Other -> NQuads
+
+  XML [label="'<?xml'"]
+  TriXroot [label="Root tag is <TriX>"]
+  RDFXMLroot [label="Root tag is <rdf:Description>"]
+  XMLunknown [label="Input limit exceeded"]
+  XML -> TriXroot -> TriX
+  XML -> RDFXMLroot -> RDFXML
+  XML -> XMLunknown
+  XMLunknown -> TriX
+  XMLunknown -> RDFXML
+
+  SharpComment [label="'#',\nskip all comments"]
+  Start -> SharpComment
+
+  At [label="'@'"]
+  Start -> At
+  SharpComment -> At
+  N3dir [label="'@forAll'\n'@forSome'\n'@keywords'"]
+  At -> N3dir -> N3
+  TurtleDir [label="'@base'\n'@prefix'"]
+  At -> TurtleDir
+  TurtleDir -> N3
+  TurtleDir -> TriG
+
+  TriGsparql [label="'BASE'\n'PREFIX'"]
+  Start -> TriGsparql -> TriG
+  SharpComment -> TriGsparql
+
+  OpenAngle2 [label="'<'"]
+  SharpComment -> OpenAngle2 -> Other
+}

@@ -1,0 +1,4 @@
+# "Whitespace within the <> is to be ignored. Whitespace may therefore be used on output to split a long URI between lines."
+
+<http:
+//example.com/s> <http://example.com/p> <http://example.com/o> .

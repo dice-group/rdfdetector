@@ -1,0 +1,27 @@
+<!-- Example 3 from https://www.w3.org/TR/2004/REC-rdf-syntax-grammar-20040210/ -->
+<!--
+  <TriX>
+-->
+<?xml-stylesheet type="text/xml" href="http://www.w3.org/2004/03/trix/all.xsl"?>
+<rdf:Description rdf:about="http://www.w3.org/TR/rdf-syntax-grammar">
+  <ex:editor>
+    <rdf:Description>
+      <ex:homePage>
+        <rdf:Description rdf:about="http://purl.org/net/dajobe/">
+        </rdf:Description>
+      </ex:homePage>
+    </rdf:Description>
+  </ex:editor>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/TR/rdf-syntax-grammar">
+  <ex:editor>
+    <rdf:Description>
+      <ex:fullName>Dave Beckett</ex:fullName>
+    </rdf:Description>
+  </ex:editor>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/TR/rdf-syntax-grammar">
+  <dc:title>RDF/XML Syntax Specification (Revised)</dc:title>
+</rdf:Description>

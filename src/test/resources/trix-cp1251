@@ -1,0 +1,11 @@
+<!--комментарий-->
+<TriX>
+  <graph>
+    <uri>http://example.org/graph2</uri>
+    <triple>
+      <qname>eg:Bob</qname>
+      <qname>eg:wife</qname>
+      <qname>eg:Mary</qname>
+    </triple>
+  </graph>
+</TriX>

@@ -1,0 +1,3 @@
+_:blank1 <http://example.com/p> "o"@en <http://example.com/g> .
+<http://example.com/s> <http://example.com/p> "o"^^<http://example.com/t> <http://example.com/g> .
+<http://example.com/s> <http://example.com/p> <http://example.com/o> <http://example.com/g> .
