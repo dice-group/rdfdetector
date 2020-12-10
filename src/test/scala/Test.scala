@@ -8,6 +8,7 @@ import org.apache.jena.rdf.model.ModelFactory
 */
 import org.apache.jena.riot.Lang
 import org.apache.jena.riot.Lang._
+import org.apache.jena.vocabulary.RDF
 import org.scalatest._
 
 class Test extends FunSuite with Matchers with OptionValues with Inside with Inspectors {
@@ -17,7 +18,7 @@ class Test extends FunSuite with Matchers with OptionValues with Inside with Ins
     ("nquads", Seq(NQUADS)),
     ("nquads-tricky", Seq(N3, NQUADS, TRIG)), // file is too long to find the first quad
     ("turtle-keyword", Seq(N3, TRIG)),
-    ("hdt-lookalike", Seq(RdfSerializationDetector.HDT)),
+    ("hdt", Seq(RdfSerializationDetector.HDT)),
     ("json-empty", Seq(RDFJSON, JSONLD, TRIG)),
     ("jsonld1", Seq(JSONLD)),
     ("jsonld2", Seq(JSONLD)),
@@ -52,13 +53,17 @@ class Test extends FunSuite with Matchers with OptionValues with Inside with Ins
     }
   }
 
-  /*
-  test("read") {
-    forAll(parameters) {
-      case (file: String, _) => instance.read(ModelFactory.createDefaultModel, resourceStream(file))
-    }
+  test("readModel with Turtle file") {
+    val m = instance.readModel(resourceStream("turtle-keyword"))
+    assertResult(true)(m.contains(m.getResource("http://example.com/s"), RDF.`type`, m.getResource("http://example.com/o")))
+    assertResult(1)(m.size)
   }
-  */
+
+  test("readModel with HDT file") {
+    val m = instance.readModel(resourceStream("hdt"))
+    assertResult(true)(m.contains(m.getResource("http://example.com/s"), RDF.`type`, m.getResource("http://example.com/o")))
+    assertResult(1)(m.size)
+  }
 
   def resourceStream(name: String) = new BufferedInputStream(getClass getResourceAsStream ("/" + name))
 

@@ -2,10 +2,12 @@ package org.dice_research.rdfdetector
 
 import collection.JavaConverters._
 import java.io._
-import org.apache.jena.rdf.model.Model
+import org.apache.jena.rdf.model.{Model, ModelFactory}
 import org.apache.jena.riot._
 import org.apache.jena.riot.Lang._
 import org.apache.lucene.util.automaton._
+import org.rdfhdt.hdt.hdt.HDTManager
+import org.rdfhdt.hdtjena.HDTGraph
 import scala.collection.mutable
 
 object RdfSerializationDetector {
@@ -352,10 +354,12 @@ class RdfSerializationDetector(readLimit: Int = 300) {
   /**
    * Read the given InputStream into a Jena Model (with format detection).
    */
-  /*
-  def read(model: Model, input: BufferedInputStream) {
-    val lang = _detect(input).head
-    RDFParser.create.source(input).lang(lang) parse model.getGraph
+  def readModel(input: BufferedInputStream): Model = _detect(input).head match {
+    case RdfSerializationDetector.HDT => ModelFactory.createModelForGraph(new HDTGraph(HDTManager.loadHDT(input), true))
+    case lang => {
+      val model = ModelFactory.createDefaultModel
+      RDFParser.create.source(input).lang(lang) parse model.getGraph
+      model
+    }
   }
-  */
 }
