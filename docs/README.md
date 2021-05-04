@@ -2,6 +2,14 @@ Detect RDF serialization format used for a given data stream.
 
 ## Usage
 
+```
+<repository>
+    <id>org.aksw.maven.internal</id>
+    <name>University Leipzig, AKSW Maven2 Repository</name>
+    <url>https://maven.aksw.org/repository/internal</url>
+</repository>
+```
+
 ```xml
 <dependency>
     <groupId>org.dice-research</groupId>
